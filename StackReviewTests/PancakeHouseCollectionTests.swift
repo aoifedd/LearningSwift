@@ -21,13 +21,6 @@ class PancakeHouseCollectionTests: XCTestCase {
     }
     
     var collection: PancakeHouseCollection!
-    
-    //Test
-    func test_collection_HasExpectedItemsCount_false(){
-        
-        XCTAssert(collection.count != 1, "Collection had expected number of items")
-    
-    }
    
     //Test
     func test_collection_HasExpectedItemsCount_true(){
@@ -49,6 +42,36 @@ class PancakeHouseCollectionTests: XCTestCase {
     //Test for correct values at index 2
     func test_thirdPancakeHouse_hasExpectedValues_true(){
         checkPancakeHousehasExpectedValues(index: 2)
+    }
+    
+    //Test adding pancake house works
+    func test_addPancakeHouse_newHouse_isAdded(){
+        // given
+        let dict: [String: Any] = ["name": "Test Pancake House",
+                                   "priceGuide": 1,
+                                   "rating": 1,
+                                   "details": "Test"]
+        let pancakeHouse = PancakeHouse(dictionary: dict)!
+        
+        // when
+        collection.addPancakeHouse(pancakeHouse)
+        
+        // then
+        XCTAssertTrue(collection._pancakeHouses.contains(pancakeHouse))
+        
+    }
+    
+    //Test removing pancake house works
+    func test_removePancakeHouse_House_isRemoved() {
+        // given
+        let pancakeHouse = collection[0]
+        
+        // when
+        try!
+        collection.removePancakeHouse(pancakeHouse)
+        
+        // then
+        XCTAssertFalse(collection._pancakeHouses.contains(pancakeHouse))
     }
     
     //Check values are correct
